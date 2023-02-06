@@ -31,8 +31,9 @@ CREATE TABLE `rez` (
   `rezID` int(16) NOT NULL,
   `sto` varchar(64) NOT NULL,
   `datumRez` DATETIME NOT NULL,
+  `opis` varchar(64) NOT NULL,
   `korisnik` varchar(64) NOT NULL,
-  `timestamp` date NOT NULL DEFAULT current_timestamp()
+  `timestamp` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
