@@ -21,6 +21,7 @@ INSERT INTO `stolovi` (`stoID`, `naziv`, `brMesta`) VALUES
 (2, '2', 4),
 (3, '3', 4),
 (4, '4', 4),
+(5, '5', 4),
 (6, '6', 4),
 (7, '7', 4),
 (8, 'pomocni', 4);
