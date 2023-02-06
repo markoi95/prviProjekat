@@ -1,0 +1,32 @@
+
+html, body{
+    height: 100%;
+}
+body{
+    background-image: linear-gradient(to bottom, #191970, #9932cc );
+}
+.btn.btn-light.rounded-3.btn-lg:hover{
+    background-color: #191970;
+    color: beige;
+}
+.btn:hover{
+    background-color: #191970 !important;
+}
+.card {
+    border: 5px solid black !important;
+}
+#dobrodosli{
+    color: #5f08a7;
+}
+.container {
+    padding: 10px;
+}
+
+.card.d-flex{
+    background-color: rgb(77, 37, 37);
+    color:whitesmoke;
+    text-align: center;
+}
+.text{
+    font: 350px;
+}
