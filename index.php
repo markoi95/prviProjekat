@@ -61,7 +61,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) { //iz POST-a uzmi u
                   </div>
                   <!-- <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p> -->
                   <div class="d-grid">
-                    <button class="btn btn-outline-dark" type="submit">Prijavi se</button>
+                    <button class="btn btn-outline-dark uloguj" type="submit">Prijavi se</button>
                   </div>
                 </form>
                 <!-- <div>
