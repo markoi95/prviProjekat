@@ -31,11 +31,12 @@ INSERT INTO `stolovi` (`stoID`, `naziv`, `brMesta`) VALUES
 CREATE TABLE `rez` (
   `rezID` int(16) NOT NULL,
   `sto` varchar(64) NOT NULL,
-  `datumRez` DATETIME NOT NULL,
-  `opis` varchar(64) NOT NULL,
-  `korisnik` varchar(64) NOT NULL,
-  `timestamp` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `datumRez` DATE NOT NULL,
+  `opis` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `rez` (`rezID`, `sto`, `datumRez`,`opis`) VALUES
+(1, 'TEST','2008-11-11', 99);
 
 
 -- --------------------------------------------------------
