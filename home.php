@@ -10,28 +10,17 @@ if (empty($_SESSION['loggeduser']) || $_SESSION['loggeduser'] == '') {
     exit();
 }
 
-$resultRez = Rez::getAll($conn);
+$resultRez = Rez::getAll($conn);    //varijabla za sve rezervacije, atr: rezID, sto, datumRez, opis
 if (!$resultRez) {
     echo "Greska kod upita<br>";
     exit();
 }
 
-$resultSto = Stolovi::getAll($conn);
+$resultSto = Stolovi::getAll($conn); //varijabla za sve stolove, atr: stoID, naziv, brMesta
 if (!$resultSto) {
     echo "Greska kod upita<br>";
     exit();
 }
-
-/* switch ($_GET['x']) {
-    case 'register':
-    echo '<form action="login.php" method="POST">
-    </form>';
-    break;
-    case 'login':
-    echo '<form action="register.php" method="POST">
-    </form>';
-    break;
-} */
 
 ?>
 <!DOCTYPE html>
@@ -61,8 +50,9 @@ if (!$resultSto) {
                         <div class="card d-flex">
                             <div class="card-body align-items-center d-flex justify-content-center">
                                 <!-- Button trigger modal -->
-                                <button type="button" id="<?php echo $redSto["stoID"] ?>" class="btn btn-danger nazivSto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                        <?php echo $redSto["naziv"] ?>
+                                <button type="button" id="<?php echo $redSto["naziv"]?>" onClick="reply_click(this.id)" class="btn btn-danger nazivSto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                        <?php echo $redSto["naziv"];
+                                        ?>
                                 </button>
                                 
                             </div>
@@ -100,19 +90,19 @@ if (!$resultSto) {
                         <th scope="col">Sto</th>
                         <th scope="col">Datum</th>
                         <th scope="col">Opis</th>
-                        <th scope="col">Korisnik</th>
+                        <!-- <th scope="col">Korisnik</th> -->
                         <th scope="col">Akcija</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <td><?php echo $redSto["sto"] ?></td>
-                        <td><?php echo $redSto["datumRez"] ?></td>
-                        <td>@<?php echo $redSto["opis"] ?></td>
+                        <td><?php echo $redRez["sto"] ?></td>
+                        <td><?php echo $redRez["datumRez"] ?></td>
+                        <td><?php echo $redRez["opis"] ?></td>
                         </tr>
                         <?php
+                            }
                         }
-                    }
                         ?> 
                     </tbody>
                 </table>
@@ -127,29 +117,31 @@ if (!$resultSto) {
 
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">STO: </h5>
-                    <div class="fs-3"><?php echo $redSto["stoID"] ?></div>
+                
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ZATVORI</button>
             </div>
 
             <div class="modal-body">
                 <form action="#" method="post" id="dodajRez">
-
-                    <div class="row justify-content-center">
-                        <div class="col">
-                            <input type="hidden" name="">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" id="stoNaziv" value="X" class="form-control form-control-lg mb-3" readonly>
+                        </div>
+                        
+                        <div class="form-group">
                             <input class="form-control form-control-lg mb-3" type="date" name="datum" placeholder="Odaberi datum" required>
                         </div>
-                    </div>
 
-                    <div class="row justify-content-center">
-                        <div class="col">
+                        <div class="form-group">
                             <input  class="form-control form-control-lg" type="text" name="detalji" placeholder="Unesi detalje" required></textarea>
                         </div>
+
+                        <div class="form-group">
+                        <button type="button" class="btn btn-secondary" type="submit" id="zakazi" >POTVRDI</button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-secondary" type="submit" id="zakazi">POTVRDI</button>
-                    </div>
+                </div>
                 </form>
             </div>
         </div>
