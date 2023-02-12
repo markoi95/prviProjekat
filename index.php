@@ -9,7 +9,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) { //iz POST-a uzmi u
     $pass = $_POST['password'];
     $user_id = 1;
 
-    $korisnik = new User($user_id, $name, $pass);
+    $korisnik = new User(null, $name, $pass);
 
     $rs = User::logIn($korisnik, $conn); //login funkcija iz klase User
 
@@ -18,6 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) { //iz POST-a uzmi u
       echo "Uspesno ste se prijavili";
       $_SESSION['loggeduser'] = "prijavljen";
       $_SESSION['user_id'] = $korisnik->id;
+      $_SESSION['korisnik'] = $korisnik->username;
       header('Location: home.php');
       exit();
     } else {
