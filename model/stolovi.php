@@ -23,7 +23,7 @@ class Stolovi {
         $q = "DELETE FROM stolovi WHERE stoID=$stoID"; //kveri za brisanje id-a iz tabele
         return $conn->query($q);                   //vracanje tabele (bez obrisanog id-a)
     }
-    public static function add($stoID, $naziv, $brMesta, mysqli $conn) // svi atributi objekta osim id-a, sam se generise
+    public static function add($naziv, $brMesta, mysqli $conn) // svi atributi objekta osim id-a, sam se generise
     {
         $q = "INSERT INTO stolovi(naziv, brMesta) values('$naziv', '$brMesta')"; //kveri za ubacivanje u tabelu
         return $conn->query($q); //vraca tabelu sa ubacenim id-em (novom rezervacijom) 
