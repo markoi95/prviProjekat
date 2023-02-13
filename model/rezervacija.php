@@ -7,16 +7,14 @@ class Rez {
     public $datumRez;
     public $opis;
     public $korisnik;
-    public $timestamp;
 
-    public function __construct($rezID = null, $sto = null, $datumRez = null, $opis = null, $korisnik = null, $timestamp = null)
+    public function __construct($rezID = null, $sto = null, $datumRez = null, $opis = null, $korisnik=null)
     {
         $this->rezID = $rezID;
         $this->sto = $sto;
         $this->datumRez = $datumRez;
         $this->opis = $opis;
         $this->korisnik = $korisnik;
-        $this->timestamp = $timestamp;
     }
 
     public static function getAll(mysqli $conn) //dobija konekciju sa bazom kao ulazni element
@@ -29,15 +27,15 @@ class Rez {
         $q = "DELETE FROM rez WHERE rezID=$rezID"; //kveri za brisanje id-a iz tabele
         return $conn->query($q);                   //vracanje tabele (bez obrisanog id-a)
     }
-    public static function add($sto, $datumRez, $korisnik, mysqli $conn) // svi atributi objekta osim id-a, sam se generise
+    public static function add($sto, $datumRez, $opis, $korisnik, mysqli $conn) // svi atributi objekta osim id-a, sam se generise
     {
-        $q = "INSERT INTO rez(sto, datumRez, korisnik) values('$sto', '$datumRez', '$korisnik')"; //kveri za ubacivanje u tabelu
+        $q = "INSERT INTO rez(sto, datumRez, opis, korisnik) values('$sto', '$datumRez','$opis','$korisnik')"; //kveri za ubacivanje u tabelu
         return $conn->query($q); //vraca tabelu sa ubacenim id-em (novom rezervacijom) 
     }
 
     public function update(mysqli $conn)
     {
-        $query = "UPDATE rez SET sto=$this->sto, datumRez=$this->datumRez, korisnik=$this->korisnik  WHERE id=$this->stoID";
+        $query = "UPDATE rez SET sto=$this->sto, datumRez=$this->datumRez, opis=$this->opis, korisnik=$this->korisnik WHERE id=$this->stoID";
         return $conn->query($query); //vraca tabelu sa update-ovanim sadrzajem 
     }
 
