@@ -3,6 +3,25 @@
     require "../model/rezervacija.php";
     require "../model/stolovi.php";
 
+    if(isset($_POST['rezID'])){
+    
+        $status = Rez::deleteById($_POST['rezID'], $conn);
+        if($status){
+            echo 'radi';
+        }else{
+            echo 'ne radi';
+        }
+    }
+
+    if(isset($_POST['stoID'])){
+    
+        $status = Stolovi::deleteById($_POST['stoID'], $conn);
+        if($status){
+            echo 'radi';
+        }else{
+            echo 'ne radi';
+        }
+    }
 
 
 
