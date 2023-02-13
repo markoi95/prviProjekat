@@ -1,4 +1,47 @@
-function reply_click(clicked_id)
+function obrisiSto(){
+  const id = document.querySelector('#stolovii').value;
+  console.log("Brisanje je pokrenuto");
+  request = $.ajax({
+  url:'handler/delete.php',
+  type:'post',
+  data: {stoID: id}
+  });
+   
+  request.done(function (response, textStatus, jqXHR) {
+    if (response === "radi") {
+      console.log("Sto je obrisan");
+      // alert("Rezervacija je obrisana");
+      location.reload(true);
+    } else {
+      console.log("Sto nije obrisan " + response);
+      // alert("Rezervacija nije obrisana");
+      location.reload(true);
+    }
+  });
+}
+function obrisiRez(rezID){
+    const id = rezID;
+    console.log("Brisanje je pokrenuto");
+    request = $.ajax({
+    url:'handler/delete.php',
+    type:'post',
+    data: {rezID: id}
+    });
+     
+    request.done(function (response, textStatus, jqXHR) {
+      if (response === "radi") {
+        console.log("Rezervacija je obrisana");
+        // alert("Rezervacija je obrisana");
+        location.reload(true);
+      } else {
+        console.log("Rezervacija nije obrisana " + response);
+        // alert("Rezervacija nije obrisana");
+        location.reload(true);
+      }
+    });
+}
+
+function reply_stoID(clicked_id)
   {
     document.getElementById("stoNaziv").value = clicked_id;
     return clicked_id;
