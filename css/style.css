@@ -25,6 +25,46 @@ body{
     background: wheat;
 
 }
+#prikazi{
+    color: white;
+    background: rgba(248, 246, 245, 0.4);
+}
+.btnStolovi{
+    color: white;
+    height: 6rem;
+    width:  6rem;
+    background: rgba(228, 102, 0, 0.6);
+    background-image: url('../images/sto.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+.table{
+    background: rgba(248, 246, 245, 0.1);
+    color: white;
+}
+#dugme{
+    color: #5f08a7;
+    background: rgba(248, 246, 245, 0.4);
+    height: 9rem;
+    width:  25rem;
+    background-image: url('../images/dodaj.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#dugmeBrisi{
+
+    color: #5f08a7;
+    height: 9rem;
+    width:  25rem;
+    background: rgba(248, 246, 245, 0.4);
+    background-image: url('../images/delete.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 .btn-secondary{
     border-width: 5px;
     border-color: #191970;
