@@ -34,9 +34,9 @@ if (!$resultSto) {
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <button type="button" onclick="location.href='logout.php';"class="btn btn-warning float-end m-2 fw-bold">ИЗАЂИ</button>
+    <button type="button" onclick="location.href='logout.php';"class="btn btn-warning float-end m-2 fw-bold">LOG OUT</button>
     <div class="container text-center">
-        <h1 style="color:whitesmoke" class="display-1 fw-bold">Ресторан 12345</h1>    
+        <h1 style="color:whitesmoke" class="display-1 fw-bold">Naslov 12345</h1>    
     </div>
 
     <div class="container-fluid">
@@ -76,8 +76,8 @@ if (!$resultSto) {
     </div> 
     <!-- //zatvara container-fluid -->
 
-        <div class="row ms-5 pt-3">
-            <div class="col-3">
+        <div class="row ms-5 pt-3 justify-content-md-center">
+            <div class="col-4">
                 <button type="button" id="prikazi" onclick="prikaziRezervacije()" class="btn fs-5 fw-bold border border-1">САКРИЈ РЕЗЕРВАЦИЈЕ</button>
             </div>
         </div>
@@ -90,7 +90,7 @@ if (!$resultSto) {
                     <?php
                         }else{
                             ?>
-                    <table class="table text-center table-bordered  table-hover">
+                    <table class="table text-center table-bordered sortable">
                         <thead >
                             <tr>
                                 <th scope="col">Сто</th>
@@ -167,7 +167,7 @@ if (!$resultSto) {
                         </div>
 
                         <div class="form-group">
-                            <input  class="form-control form-control-lg" type="text" name="detalji" placeholder="Unesi detalje" required></textarea>
+                            <input  class="form-control form-control-lg" type="text" name="detalji" placeholder="Unesi detalje" required>
                         </div>
 
                         <div class="form-group">
@@ -181,6 +181,7 @@ if (!$resultSto) {
         </div>
     </div>
     </div>
+
     <!-- Modal za dodavanje stola-->
     <div class="modal fade" id="dodajStoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -192,10 +193,11 @@ if (!$resultSto) {
             <div class="modal-body">
                 <form action="#" method="post" id="dodajSto">
                 <div class="form-group">
-                        <input  class="form-control form-control-lg mb-1" type="text" name="naziv" placeholder="Unesi naziv stola" required></textarea>
+                        <input  class="form-control form-control-lg mb-1" onchange="proveriNaziv()" type="text" name="naziv" id="naziv" placeholder="Unesi naziv stola" required>
+                        <span class="fs-3 fw-bold text-danger" id="upozorenje"></span>
                 </div>
                 <div class="form-group">
-                        <input  class="form-control form-control-lg" type="text" name="brMesta" placeholder="Unesi broj mesta" required></textarea>
+                        <input  class="form-control form-control-lg" type="text" name="brMesta" placeholder="Unesi broj mesta" required>
                 </div>
             </div>
                 <div class="modal-footer">
@@ -212,7 +214,7 @@ if (!$resultSto) {
 
     <!-- Modal za brisanje -->
     <div class="modal fade" id="ObrisiModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
             <div class="modal-header">
@@ -220,12 +222,11 @@ if (!$resultSto) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <label for="stolovii">Sto:</label>
                 <select name="stolovii" id="stolovii">
                 <?php
                     foreach ($resultSto as $redSto1){
                 ?>
-                <option value="<?php echo $redSto1["stoID"]?>"><?php echo $redSto1["naziv"]?></option>
+                <option value="<?php echo $redSto1["stoID"]?>"> <?php echo $redSto1["naziv"]?></option>
                 <?php } ?>
                 </select>
             </div>
@@ -259,7 +260,7 @@ if (!$resultSto) {
                             <input class="form-control form-control-lg mb-3" type="date" name="datum1" placeholder="Odaberi datum" required>
                         </div>
                         <div class="form-group">
-                            <input  class="form-control form-control-lg" type="text" name="detalji1" placeholder="Unesi detalje" required></textarea>
+                            <input  class="form-control form-control-lg" type="text" name="detalji1" placeholder="Unesi detalje" required>
                         </div>
                         <div class="form-group">
                             <button class="btn btn-secondary" type="submit" id="zakazi">POTVRDI</button>
@@ -272,9 +273,34 @@ if (!$resultSto) {
         </div>
         </div>
     </div>
-
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>                
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        function proveriNaziv(){
+            var naziv = document.getElementById("naziv");
+            const button1 = document.getElementById("dodajS");
+            $.ajax({                
+                    url: 'handler/get.php',
+                    type:'POST',
+                    dataType: 'JSON',
+                    data:{
+                        naziv: naziv.value
+                    },
+                    success: function(data) {
+                        if(jQuery.isEmptyObject(data)){
+                        document.getElementById("upozorenje").innerHTML = "";
+                        button1.disabled = false;
+                        console.log("prazan");
+                        }else {
+                            console.log(data);
+                            document.getElementById("upozorenje").innerHTML = "STO VEĆ POSTOJI";
+                            button1.disabled = true;
+                        }
+                    }
+                });
+            }
+    </script>
 </body>
 </html>

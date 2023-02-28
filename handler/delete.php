@@ -23,6 +23,15 @@
         }
     }
 
+    if(isset($_POST['sto'])){
+    
+        $status = Rez::deleteBySto($_POST['sto'], $conn);
+        if($status){
+            echo 'radi';
+        }else{
+            echo 'ne radi';
+        }
+    }
 
 
 ?>

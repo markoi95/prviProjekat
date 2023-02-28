@@ -27,6 +27,11 @@ class Rez {
         $q = "DELETE FROM rez WHERE rezID=$rezID"; //kveri za brisanje id-a iz tabele
         return $conn->query($q);                   //vracanje tabele (bez obrisanog id-a)
     }
+    public static function deleteBySto($sto, mysqli $conn) //ulazni element id koji cemo da obrisemo i konekcija sa bazom
+    {
+        $q = "DELETE FROM rez WHERE sto=$sto"; //kveri za brisanje id-a iz tabele
+        return $conn->query($q);                   //vracanje tabele (bez obrisanog id-a)
+    }
     public static function add($sto, $datumRez, $opis, $korisnik, mysqli $conn) // svi atributi objekta osim id-a, sam se generise
     {
         $q = "INSERT INTO rez(sto, datumRez, opis, korisnik) values('$sto', '$datumRez','$opis','$korisnik')"; //kveri za ubacivanje u tabelu
@@ -37,6 +42,30 @@ class Rez {
     {
         $query = "UPDATE rez SET sto=$this->sto, datumRez=$this->datumRez, opis=$this->opis, korisnik=$this->korisnik WHERE id=$this->stoID";
         return $conn->query($query); //vraca tabelu sa update-ovanim sadrzajem 
+    }
+    public static function getByID($rezID, mysqli $conn)
+    {
+        $q = "SELECT * FROM rez WHERE rezID=$rezID";
+        $myArray = array();
+        if ($result = $conn->query($q)) {
+
+            while ($row = $result->fetch_array(1)) {
+                $myArray[] = $row;
+            }
+        }
+        return $myArray;
+    }
+    public static function getBySto($sto, mysqli $conn)
+    {
+        $q = "SELECT * FROM rez WHERE sto=$sto";
+        $myArray = array();
+        if ($result = $conn->query($q)) {
+
+            while ($row = $result->fetch_array(1)) {
+                $myArray[] = $row;
+            }
+        }
+        return $myArray;
     }
 
 }
